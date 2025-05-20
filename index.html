@@ -51,6 +51,25 @@
   .modal-content button:hover {
     background-color: #218838;
   }
+        <style>
+  /* ... твои предыдущие стили ... */
+
+  .success-message {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.5s ease;
+    color: #28a745;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .success-message.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+
 </style>
 
     <meta charset="UTF-8">
@@ -749,6 +768,41 @@
     </form>
   </div>
 </div>
+
+    <style>
+  .modal {
+    position: fixed;
+    z-index: 999;
+    /* другие стили модального окна */
+  }
+
+  .modal.show {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* ... другие стили ... */
+
+  .modal-content button:hover {
+    background-color: #218838;
+  }
+
+  /* 🔽 Вот сюда добавляй анимацию */
+  .success-message {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.5s ease;
+    color: #28a745;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .success-message.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
 
 <script>
   const modal = document.getElementById("regModal");
