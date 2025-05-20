@@ -1,0 +1,1218 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bi.Group - Байланыс</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: #f8f8f8;
+            color: #333;
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+        
+        header {
+            background-color: #000;
+            color: white;
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        header.scrolled {
+            padding: 1rem 0;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        
+        .logo span {
+            color: #c9a74d;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 2.5rem;
+            position: relative;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: #c9a74d;
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+        
+        .nav-links a:hover {
+            color: #c9a74d;
+        }
+        
+        .language-switcher {
+            display: flex;
+            margin-left: 2rem;
+        }
+        
+        .language-switcher button {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            padding: 0.5rem;
+            margin: 0 0.2rem;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+        
+        .language-switcher button:hover {
+            color: #c9a74d;
+        }
+        
+        .language-switcher button.active {
+            color: #c9a74d;
+            font-weight: bold;
+        }
+        
+        .contact-hero {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .contact-hero:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+        }
+        
+        .contact-hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 20px;
+            animation: fadeInUp 1s ease;
+        }
+        
+        .contact-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        .contact-hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+        
+        .contact-section {
+            padding: 6rem 0;
+            background-color: #fff;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2.8rem;
+            color: #000;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 3px;
+            background: #c9a74d;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .section-title p {
+            color: #666;
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-top: 3rem;
+        }
+        
+        .contact-info h3 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: #000;
+            font-weight: 600;
+        }
+        
+        .contact-info p {
+            margin-bottom: 2rem;
+            color: #555;
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+        
+        .contact-details {
+            margin-top: 3rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+            padding: 1.5rem;
+            border-radius: 5px;
+            background: #f9f9f9;
+        }
+        
+        .contact-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .contact-item i {
+            font-size: 1.8rem;
+            color: #c9a74d;
+            margin-right: 1.5rem;
+            margin-top: 0.3rem;
+        }
+        
+        .contact-item-content h4 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #000;
+        }
+        
+        .contact-item-content p {
+            margin-bottom: 0;
+            color: #666;
+        }
+        
+        .contact-form {
+            background-color: #fff;
+            padding: 3rem;
+            border-radius: 5px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.1);
+            transition: all 0.5s ease;
+        }
+        
+        .contact-form:hover {
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+        
+        .form-group {
+            margin-bottom: 2rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.8rem;
+            color: #000;
+            font-weight: 500;
+            font-size: 1.1rem;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #c9a74d;
+            box-shadow: 0 0 0 2px rgba(201, 167, 77, 0.2);
+        }
+        
+        .form-group textarea {
+            height: 180px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background-color: #c9a74d;
+            color: #000;
+            padding: 1rem 3rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            font-size: 1.1rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            width: 100%;
+        }
+        
+        .submit-btn:hover {
+            background-color: #b8963a;
+            transform: translateY(-2px);
+        }
+        
+        .map-section {
+            height: 600px;
+            position: relative;
+        }
+        
+        .map-section iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            filter: grayscale(20%) contrast(110%);
+        }
+        
+        .office-images {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 5rem;
+        }
+        
+        .office-image {
+            height: 300px;
+            border-radius: 5px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.5s ease;
+        }
+        
+        .office-image:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+        
+        .office-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .office-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        .office-image-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: white;
+            padding: 2rem 1.5rem 1.5rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .office-image:hover .office-image-overlay {
+            opacity: 1;
+        }
+        
+        .office-image-overlay h4 {
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+        
+        .contact-person {
+            display: flex;
+            justify-content: space-between;
+            margin: 5rem 0;
+        }
+        
+        .person-card {
+            width: 48%;
+            display: flex;
+            align-items: center;
+            background: #fff;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .person-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+        
+        .person-image {
+            width: 40%;
+            height: 400px;
+        }
+        
+        .person-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .person-info {
+            width: 60%;
+            padding: 2rem;
+            position: relative;
+        }
+        
+        .person-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #000;
+        }
+        
+        .person-info p {
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        
+        .contact-methods {
+            margin-top: 2rem;
+        }
+        
+        .contact-method {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .contact-method i {
+            width: 40px;
+            height: 40px;
+            background: #f5f5f5;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            color: #c9a74d;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+        
+        .contact-method:hover i {
+            background: #c9a74d;
+            color: #fff;
+        }
+        
+        .contact-method a {
+            color: #333;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .contact-method:hover a {
+            color: #c9a74d;
+        }
+        
+        .social-icons {
+            display: flex;
+            margin-top: 2rem;
+        }
+        
+        .social-icons a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            color: #333;
+            transition: all 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background: #c9a74d;
+            color: #fff;
+            transform: translateY(-5px);
+        }
+        
+        .contact-cta {
+            text-align: center;
+            margin: 3rem 0;
+            font-size: 1.8rem;
+            color: #000;
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+        
+        .contact-cta:after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 3px;
+            background: #c9a74d;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .office-locations {
+            margin: 5rem 0;
+        }
+        
+        .location-card {
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 3rem;
+            transition: all 0.3s;
+        }
+        
+        .location-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+        
+        .location-header {
+            background: #000;
+            color: #fff;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .location-header i {
+            font-size: 2rem;
+            margin-right: 1rem;
+            color: #c9a74d;
+        }
+        
+        .location-body {
+            display: flex;
+        }
+        
+        .location-info {
+            width: 40%;
+            padding: 2rem;
+        }
+        
+        .location-info h4 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #000;
+        }
+        
+        .location-info p {
+            color: #666;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+        
+        .location-map {
+            width: 60%;
+            height: 300px;
+            cursor: pointer;
+        }
+        
+        .location-map iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            filter: grayscale(20%) contrast(110%);
+        }
+        
+        .map-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .map-modal-content {
+            width: 90%;
+            max-width: 1000px;
+            height: 80%;
+            position: relative;
+        }
+        
+        .map-modal-content iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            color: #fff;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+        
+        footer {
+            background-color: #000;
+            color: white;
+            padding: 5rem 0 2rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: #c9a74d;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+        
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 2px;
+            background: #c9a74d;
+            bottom: 0;
+            left: 0;
+        }
+        
+        .footer-column p {
+            margin-bottom: 1.5rem;
+            color: #aaa;
+            line-height: 1.8;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 1rem;
+        }
+        
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+            display: block;
+        }
+        
+        .footer-links a:hover {
+            color: #c9a74d;
+            transform: translateX(5px);
+        }
+        
+        .footer-links i {
+            margin-right: 0.5rem;
+            color: #c9a74d;
+        }
+        
+        .social-links {
+            display: flex;
+            margin-top: 2rem;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border-radius: 50%;
+            margin-right: 1rem;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background: #c9a74d;
+            color: #000;
+            transform: translateY(-5px);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #aaa;
+        }
+        
+        @media (max-width: 1200px) {
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .person-card {
+                flex-direction: column;
+            }
+            
+            .person-image, .person-info {
+                width: 100%;
+            }
+            
+            .person-image {
+                height: 300px;
+            }
+            
+            .location-body {
+                flex-direction: column;
+            }
+            
+            .location-info, .location-map {
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .contact-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .office-images {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-person {
+                flex-direction: column;
+            }
+            
+            .person-card {
+                width: 100%;
+                margin-bottom: 2rem;
+            }
+        }
+        
+        /* Анимации */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+        }
+        
+        .slide-up {
+            transform: translateY(50px);
+        }
+        
+        .slide-up.visible {
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <header id="mainHeader">
+        <div class="container">
+            <nav>
+                <div class="logo">BI.<span>GROUP</span></div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Басты бет</a></li>
+                    <li><a href="about.html">Компания туралы</a></li>
+                    <li><a href="services.html">Қызметтер</a></li>
+                    <li><a href="projects.html">Жобалар</a></li>
+                    <li><a href="contact.html">Байланыс</a></li>
+                </ul>
+                <div class="language-switcher">
+                    <button data-lang="ru">RU</button>
+                    <button class="active" data-lang="kz">KZ</button>
+                    <button data-lang="en">EN</button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="contact-hero">
+        <div class="contact-hero-content">
+            <h1>Бізбен хабарласыңыз</h1>
+            <p>Біз қалалық ортаның болашағын анықтайтын инновациялық сәулет шешімдерін жасаймыз. Келесі жобаңызды талқылайық.</p>
+        </div>
+    </section>
+
+    <section class="contact-section">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Байланыс ақпараты</h2>
+                <p>BI.Group - бүкіл әлем бойынша кеңселері бар жетекші сәулеттік және жобалау компаниясы. Біз тұрақты және шабыттандыратын ортаны құруға ұмтыламыз.</p>
+            </div>
+            
+            <div class="contact-person fade-in">
+            <div class="person-card slide-up">
+                <div class="person-image">
+                    <img src="https://i.pinimg.com/736x/6a/30/98/6a3098593febc520e6100d2bd0fb1928.jpg" alt="Жумабек Эльхат">
+                </div>
+                <div class="person-info">
+                    <h3>Жумабек Эльхат</h3>
+                    <p>Студент 1 курса</p>
+                    <p>Нархоз университеті, Математика және статистика мамандығы. Жас және амбициялы студент, болашақта статистика саласында маман болуды армандайды.</p>
+            
+                    <div class="contact-methods">
+                        <div class="contact-method">
+                            <i class="fas fa-phone"></i>
+                            <a href="tel:+87471071686">+7 (747) 107-16-86</a>
+                        </div>
+                        <div class="contact-method">
+                            <i class="fas fa-envelope"></i>
+                            <a href="mailto:elhat@bi.group">elhat@bi.group</a>
+                        </div>
+                        <div class="contact-method">
+                            <i class="fas fa-calendar-alt"></i>
+                            <a href="#">Кездесуге жазылу</a>
+                        </div>
+                    </div>
+            
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="person-card slide-up" style="transition-delay: 0.2s">
+                <div class="person-image">
+                    <img src="https://i.pinimg.com/736x/d0/b4/46/d0b4463c2698714237581d354f4c084a.jpg" alt="Бершімбай Алишер">
+                </div>
+                <div class="person-info">
+                    <h3>Бершімбай Алишер</h3>
+                    <p>Студент 1 курса</p>
+                    <p>Нархоз университеті, Математика және статистика мамандығы. Жаңа идеяларды қолдауға дайын жас маман, математикалық модельдеуге қызығады.</p>
+            
+                    <div class="contact-methods">
+                        <div class="contact-method">
+                            <i class="fas fa-phone"></i>
+                            <a href="tel:+87479977417">+7 (747) 997-74-17</a>
+                        </div>
+                        <div class="contact-method">
+                            <i class="fas fa-envelope"></i>
+                            <a href="mailto:alisher@bi.group">alisher@bi.group</a>
+                        </div>
+                        <div class="contact-method">
+                            <i class="fas fa-calendar-alt"></i>
+                            <a href="#">Кездесуге жазылу</a>
+                        </div>
+                    </div>
+            
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <div class="contact-cta fade-in">
+                +7 (7172) 123-456 нөміріне қоңырау шалыңыз немесе хабар қалдырыңыз
+            </div>
+            
+            <div class="contact-content">
+                <div class="contact-info fade-in slide-up">
+                    <h3>Жобаңызды талқылайық</h3>
+                    <p>Біздің эксперттер тобы концепциядан іске асыруға дейін әрбір кезеңде сізге көмектесуге дайын. Консультация алу үшін форманы толтырыңыз немесе бізбен тікелей байланысыңыз.</p>
+                    <p>Біз коммерциялық, тұрғын үй және қоғамдық сәулет саласында кез келген масштабтағы жобаларға кешенді шешімдер ұсынамыз.</p>
+                    
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div class="contact-item-content">
+                                <h4>Астанадағы Бас кеңсе</h4>
+                                <p>010000, Астана қ., Тұран даңғылы, 18, 205-офис</p>
+                                <p>"Capital Tower" бизнес орталығы</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <div class="contact-item-content">
+                                <h4>Телефон</h4>
+                                <p>+7 (7172) 123-456 (негізгі)</p>
+                                <p>+7 (7172) 654-321 (жобалар бөлімі)</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <div class="contact-item-content">
+                                <h4>Электрондық пошта</h4>
+                                <p>info@bi.group (жалпы сұрақтар)</p>
+                                <p>projects@bi.group (жаңа жобалар үшін)</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-clock"></i>
+                            <div class="contact-item-content">
+                                <h4>Жұмыс уақыты</h4>
+                                <p>Дс-См: 9:00 - 18:00</p>
+                                <p>Сс-Жс: алдын ала келісім бойынша</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form fade-in slide-up">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Сіздің атыңыз</label>
+                            <input type="text" id="name" name="name" required placeholder="Асқар Жанғалиев">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Электрондық пошта</label>
+                            <input type="email" id="email" name="email" required placeholder="example@domain.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Телефон</label>
+                            <input type="tel" id="phone" name="phone" placeholder="+7 (XXX) XXX-XX-XX">
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Тақырып</label>
+                            <input type="text" id="subject" name="subject" placeholder="Мысалы: Коммерциялық жоба">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Хабар</label>
+                            <textarea id="message" name="message" required placeholder="Жобаңызды немесе сұрағыңызды сипаттаңыз..."></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Сұрақ жіберу</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="office-locations fade-in">
+                <h3 style="text-align: center; margin-bottom: 3rem; font-size: 2rem;">Егер сіз біздің компаниямызға қызығатын болсаңыз, біздің кеңселерімізге бара аласыз</h3>
+                
+                <div class="location-card slide-up">
+                    <div class="location-header">
+                        <i class="fas fa-building"></i>
+                        <h3>Астана</h3>
+                    </div>
+                    <div class="location-body">
+                        <div class="location-info">
+                            <h4>Бас кеңсе</h4>
+                            <p><i class="fas fa-map-marker-alt"></i> 010000, Астана қ., Тұран даңғылы, 18, 205-офис</p>
+                            <p><i class="fas fa-phone"></i> +7 (7172) 123-456</p>
+                            <p><i class="fas fa-envelope"></i> astana@bi.group</p>
+                            <p><i class="fas fa-clock"></i> Дс-См: 9:00 - 18:00</p>
+                        </div>
+                        <div class="location-map" onclick="openMapModal('https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2503.215334032038!2d71.42721531575567!3d51.13384717957547!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x424585b1b1b1b1b1%3A0x1b1b1b1b1b1b1b1b!2z0JDRgdGC0L7QvNCw0L3QtNCw0YDRgdC60LjQuSDQv9C-0LvRjNGB0LrQsNGP!5e0!3m2!1sru!2skz!4v1620000000000!5m2!1sru!2skz')">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2503.215334032038!2d71.42721531575567!3d51.13384717957547!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x424585b1b1b1b1b1%3A0x1b1b1b1b1b1b1b1b!2z0JDRgdGC0L7QvNCw0L3QtNCw0YDRgdC60LjQuSDQv9C-0LvRjNGB0LrQsNGP!5e0!3m2!1sru!2skz!4v1620000000000!5m2!1sru!2skz" allowfullscreen="" loading="lazy"></iframe>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="location-card slide-up" style="transition-delay: 0.2s">
+                    <div class="location-header">
+                        <i class="fas fa-building"></i>
+                        <h3>Алматы</h3>
+                    </div>
+                    <div class="location-body">
+                        <div class="location-info">
+                            <h4>Өкілдік</h4>
+                            <p><i class="fas fa-map<p><i class="fas fa-map-marker-alt"></i> 050000, Алматы қ., Абай даңғылы, 44, 310-офис</p>
+                            <p><i class="fas fa-phone"></i> +7 (727) 123-45-67</p>
+                            <p><i class="fas fa-envelope"></i> almaty@bi.group</p>
+                            <p><i class="fas fa-clock"></i> Дс-См: 9:00 - 18:00</p>
+                        </div>
+                        <div class="location-map" onclick="openMapModal('https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2906.785714285714!2d76.94594594594594!3d43.23507142857143!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDPCsDE0JzA2LjIiTiA3NsKwNTYnNDkuNCJF!5e0!3m2!1sru!2skz!4v1620000000000!5m2!1sru!2skz')">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2906.785714285714!2d76.94594594594594!3d43.23507142857143!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDPCsDE0JzA2LjIiTiA3NsKwNTYnNDkuNCJF!5e0!3m2!1sru!2skz!4v1620000000000!5m2!1sru!2skz" allowfullscreen="" loading="lazy"></iframe>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="location-card slide-up" style="transition-delay: 0.4s">
+                    <div class="location-header">
+                        <i class="fas fa-building"></i>
+                        <h3>Шымкент</h3>
+                    </div>
+                    <div class="location-body">
+                        <div class="location-info">
+                            <h4>Өкілдік</h4>
+                            <p><i class="fas fa-map-marker-alt"></i> 160000, Шымкент қ., Тәуелсіздік даңғылы, 12, 105-офис</p>
+                            <p><i class="fas fa-phone"></i> +7 (7252) 45-67-89</p>
+                            <p><i class="fas fa-envelope"></i> shymkent@bi.group</p>
+                            <p><i class="fas fa-clock"></i> Дс-См: 9:00 - 18:00</p>
+                        </div>
+                        <div class="location-map" onclick="openMapModal('https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2710.0!2d69.6!3d42.3!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDLCsDE4JzAwLjAiTiA2OcKwMzYnMDAuMCJF!5e0!3m2!1sru!2skz!4v1620000000000!5m2!1sru!2skz')">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2710.0!2d69.6!3d42.3!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDLCsDE4JzAwLjAiTiA2OcKwMzYnMDAuMCJF!5e0!3m2!1sru!2skz!4v1620000000000!5m2!1sru!2skz" allowfullscreen="" loading="lazy"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="office-images fade-in">
+                <div class="office-image slide-up">
+                    <img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80" alt="Астана кеңсесі">
+                    <div class="office-image-overlay">
+                        <h4>Астана кеңсесі</h4>
+                        <p>Біздің бас кеңсе</p>
+                    </div>
+                </div>
+                <div class="office-image slide-up" style="transition-delay: 0.1s">
+                    <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Алматы кеңсесі">
+                    <div class="office-image-overlay">
+                        <h4>Алматы кеңсесі</h4>
+                        <p>Қазақстанның оңтүстік өңіріне қызмет көрсету</p>
+                    </div>
+                </div>
+                <div class="office-image slide-up" style="transition-delay: 0.2s">
+                    <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80" alt="Жобалық команда">
+                    <div class="office-image-overlay">
+                        <h4>Жобалық команда</h4>
+                        <p>Біздің мамандар жұмыста</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="map-section">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2503.215334032038!2d71.42721531575567!3d51.13384717957547!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x424585b1b1b1b1b1%3A0x1b1b1b1b1b1b1b1b!2z0JDRgdGC0L7QvNCw0L3QtNCw0YDRgdC60LjQuSDQv9C-0LvRjNGB0LrQsNGP!5e0!3m2!1sru!2skz!4v1620000000000!5m2!1sru!2skz" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+
+    <div class="map-modal" id="mapModal">
+        <div class="map-modal-content">
+            <span class="close-modal" onclick="closeMapModal()">&times;</span>
+            <iframe id="modalIframe" src="" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>BI.Group</h3>
+                    <p>Біз қалалық ортаның болашағын анықтайтын инновациялық сәулет шешімдерін жасаймыз.</p>
+                    <p>Қазіргі заманғы сәулет пен дизайнның лидері.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Байланыс</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> Астана, Тұран даңғылы, 18</a></li>
+                        <li><a href="tel:+77172123456"><i class="fas fa-phone"></i> +7 (7172) 123-456</a></li>
+                        <li><a href="mailto:info@bi.group"><i class="fas fa-envelope"></i> info@bi.group</a></li>
+                        <li><a href="#"><i class="fas fa-clock"></i> Дс-См: 9:00 - 18:00</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Қызметтер</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Сәулеттік жобалау</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Интерьер дизайны</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Ландшафтық дизайн</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Құрылыс жобалау</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Консультация</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Пайдалы сілтемелер</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Жобалар</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Команда</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Медиа</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Мұрағат</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Мансап</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 BI.Group. Барлық құқықтар қорғалған.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('mainHeader');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Language switcher
+        const langButtons = document.querySelectorAll('.language-switcher button');
+        langButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                langButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+                // Here you would add language switching logic
+            });
+        });
+
+        // Map modal functionality
+        function openMapModal(src) {
+            const modal = document.getElementById('mapModal');
+            const iframe = document.getElementById('modalIframe');
+            iframe.src = src;
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMapModal() {
+            const modal = document.getElementById('mapModal');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            const modal = document.getElementById('mapModal');
+            if (event.target == modal) {
+                closeMapModal();
+            }
+        });
+
+        // Scroll animations
+        const fadeElements = document.querySelectorAll('.fade-in');
+        const slideElements = document.querySelectorAll('.slide-up');
+
+        function checkScroll() {
+            fadeElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight - 100) {
+                    element.classList.add('visible');
+                }
+            });
+
+            slideElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight - 100) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+
+        // Check on initial load
+        checkScroll();
+
+        // Check on scroll
+        window.addEventListener('scroll', checkScroll);
+
+        // Form submission
+        const contactForm = document.getElementById('contactForm');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                // Here you would add form submission logic
+                alert('Сіздің сұрағыңыз қабылданды! Біз сізбен жақын арада байланысамыз.');
+                this.reset();
+            });
+        }
+    </script>
+</body>
+</html> сделай код для подставки для дфух людей чтобы убрать фото и информацию аскар жангалиева и айгул садыкова нам надо убрать эти две и пихнуть туда двух людей у одного фото томас шелби с шляпой и второй джеймс уилсон у томаса сверху Жумабек Эльхат и у Джеймса БершІмбай  Алишер не пиши код сначало просто напиши эту часть которое нам надо и измени информацию о них обо студенты 1 курса нархоз профессия математика статистика и измени их номера им напиши снизу новые номера у Эльата 87471071686 и у Алишера 87479977417 и просто кусок кода для подставки и обьясни где нам ее подставить и убрать старых людей

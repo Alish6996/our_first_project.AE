@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BI.Group - Компания туралы</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.8;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+        
+        header {
+            background-color: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 1.5rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        header.scrolled {
+            padding: 1rem 0;
+            background-color: rgba(0, 0, 0, 0.95);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        
+        .logo span {
+            color: #c8a97e;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 2.5rem;
+            position: relative;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: color 0.3s;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-links a:hover {
+            color: #c8a97e;
+        }
+        
+        .nav-links li:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: #c8a97e;
+            bottom: 0;
+            left: 0;
+            transition: width 0.3s;
+        }
+        
+        .nav-links li:hover:after {
+            width: 100%;
+        }
+        
+        .about-hero {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            margin-top: 80px;
+        }
+        
+        .about-hero:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+        }
+        
+        .about-hero .container {
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 1s ease;
+        }
+        
+        .about-hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        .about-hero p {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto;
+            color: #c8a97e;
+        }
+        
+        .about-section {
+            padding: 8rem 0;
+            background-color: #fff;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+        
+        .section-title h2 {
+            font-size: 3rem;
+            color: #222;
+            font-weight: 700;
+            letter-spacing: 1px;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 1rem;
+        }
+        
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 3px;
+            background: #c8a97e;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        
+        .about-text h3 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: #222;
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+        
+        .about-text h3:after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 2px;
+            background: #c8a97e;
+            bottom: 0;
+            left: 0;
+        }
+        
+        .about-text p {
+            margin-bottom: 1.5rem;
+            color: #555;
+            line-height: 1.8;
+        }
+        
+        .about-image {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            height: 500px;
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        .team-section {
+            padding: 8rem 0;
+            background-color: #f5f5f5;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+        }
+        
+        .team-member {
+            background-color: white;
+            padding: 2.5rem;
+            border-radius: 5px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .team-member:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .team-member:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: #c8a97e;
+        }
+        
+        .team-member img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1.5rem;
+            border: 5px solid #f5f5f5;
+            transition: all 0.3s ease;
+        }
+        
+        .team-member:hover img {
+            border-color: #c8a97e;
+        }
+        
+        .team-member h4 {
+            margin-bottom: 0.5rem;
+            color: #222;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .team-member p {
+            color: #c8a97e;
+            font-style: italic;
+            margin-bottom: 1.5rem;
+        }
+        
+        .team-member .social-links {
+            display: flex;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+        
+        .team-member .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(200, 169, 126, 0.1);
+            color: #c8a97e;
+            border-radius: 50%;
+            margin: 0 0.5rem;
+            transition: all 0.3s;
+        }
+        
+        .team-member .social-links a:hover {
+            background: #c8a97e;
+            color: white;
+        }
+        
+        .stats-section {
+            padding: 8rem 0;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            position: relative;
+        }
+        
+        .stats-section:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(200, 169, 126, 0.2);
+        }
+        
+        .stats-section .container {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            text-align: center;
+        }
+        
+        .stat-item {
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+        }
+        
+        .stat-item:hover {
+            background: rgba(200, 169, 126, 0.3);
+            transform: translateY(-5px);
+        }
+        
+        .stat-item h3 {
+            font-size: 4rem;
+            margin-bottom: 0.5rem;
+            color: #c8a97e;
+            font-weight: 700;
+        }
+        
+        .stat-item p {
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+        }
+        
+        .values-section {
+            padding: 8rem 0;
+            background-color: #fff;
+        }
+        
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+        
+        .value-item {
+            text-align: center;
+            padding: 3rem 2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .value-item:hover {
+            transform: translateY(-10px);
+        }
+        
+        .value-item i {
+            font-size: 3.5rem;
+            color: #c8a97e;
+            margin-bottom: 2rem;
+            display: block;
+        }
+        
+        .value-item h4 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: #222;
+            font-weight: 600;
+        }
+        
+        .value-item p {
+            color: #666;
+            line-height: 1.8;
+        }
+
+        /* New Comparison Section Styles */
+        .compare-btn-container {
+            text-align: center;
+            margin: 3rem 0;
+        }
+
+        .compare-btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background-color: #c8a97e;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(200, 169, 126, 0.3);
+        }
+
+        .compare-btn:hover {
+            background-color: #b5986e;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(200, 169, 126, 0.4);
+        }
+
+        .comparison-section {
+            display: none;
+            padding: 6rem 0;
+            background-color: #f5f5f5;
+        }
+
+        .comparison-section.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .comparison-company {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .comparison-company:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .company-logo {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .company-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .comparison-company:hover .company-logo img {
+            transform: scale(1.05);
+        }
+
+        .company-info {
+            padding: 2rem;
+        }
+
+        .company-name {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #222;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .company-name.bi {
+            color: #c8a97e;
+        }
+
+        .company-pros-cons {
+            margin-top: 1.5rem;
+        }
+
+        .pros, .cons {
+            margin-bottom: 1.5rem;
+        }
+
+        .pros h4, .cons h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .pros h4 {
+            color: #4CAF50;
+        }
+
+        .cons h4 {
+            color: #F44336;
+        }
+
+        .pros h4:before, .cons h4:before {
+            margin-right: 0.5rem;
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+        }
+
+        .pros h4:before {
+            content: "\f058";
+        }
+
+        .cons h4:before {
+            content: "\f057";
+        }
+
+        .pros ul, .cons ul {
+            list-style-type: none;
+        }
+
+        .pros li, .cons li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .pros li:before {
+            content: "+";
+            position: absolute;
+            left: 0;
+            color: #4CAF50;
+            font-weight: bold;
+        }
+
+        .cons li:before {
+            content: "-";
+            position: absolute;
+            left: 0;
+            color: #F44336;
+            font-weight: bold;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        footer {
+            background-color: #222;
+            color: #fff;
+            padding: 5rem 0 2rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+        
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-logo span {
+            color: #c8a97e;
+        }
+        
+        .footer-about p {
+            color: #aaa;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-links h3, .footer-contact h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .footer-links h3:after, .footer-contact h3:after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 2px;
+            background: #c8a97e;
+            bottom: 0;
+            left: 0;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-links a {
+            color: #aaa;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: #c8a97e;
+        }
+        
+        .footer-contact p {
+            color: #aaa;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .footer-contact i {
+            margin-right: 1rem;
+            color: #c8a97e;
+        }
+        
+        .social-links {
+            margin-bottom: 2rem;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border-radius: 50%;
+            margin-right: 1rem;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background: #c8a97e;
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .about-hero h1 {
+                font-size: 3.5rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2.5rem;
+            }
+
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .about-hero {
+                height: 60vh;
+                margin-top: 70px;
+            }
+            
+            .about-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .about-hero p {
+                font-size: 1.2rem;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .about-section, .team-section, .stats-section, .values-section, .comparison-section {
+                padding: 5rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header id="header">
+        <div class="container">
+            <nav>
+                <div class="logo">BI.<span>GROUP</span></div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Басты бет</a></li>
+                    <li><a href="about.html">Компания туралы</a></li>
+                    <li><a href="services.html">Қызметтер</a></li>
+                    <li><a href="projects.html">Жобалар</a></li>
+                    <li><a href="contact.html">Байланыс</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="about-hero">
+        <div class="container">
+            <h1>BI.Group компаниясы туралы</h1>
+            <p>Инновациялар. Сапа. Сенімділік.</p>
+        </div>
+    </section>
+
+    <section class="about-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Біздің тарихымыз және философиямыз</h2>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Біздің тарихымыз</h3>
+                    <p>2010 жылы құрылған BI.Group IT-шешімдер саласындағы кішігірім стартаптан халықаралық деңгейдегі лидерге айналды. Веб-сайттар әзірлеуден бастап, біз қызмет көрсету ауқымын кеңейтіп, бизнестің цифрлық трансформациясының толық циклін қамтыдық.</p>
+                    <p>Қазіргі уақытта BI.Group - бұл Мәскеу, Санкт-Петербург, Лондон, Нью-Йорк және Сингапурда кеңселері бар халықаралық компания. Біздің шешімдерімізді Fortune 500 тізіміне кіретіндерді қоса алғанда, әлем бойынша 500-ден астам компания пайдаланады.</p>
+                    <h3>Біздің философиямыз</h3>
+                    <p>Біз технологиялар адамдарға және бизнеске қызмет етуі керек деп сенеміз. Біздің тәсіліміз клиенттердің қажеттіліктерін терең түсінуге және шынымен жұмыс істейтін шешімдерді жасауға негізделген.</p>
+                    <p>"Құндылық жасау" - бұл принцип әрбір жобамыздың негізінде жатыр. Біз клиенттің табысы - бұл біздің табысымыз деген ұзақ мерзімді серіктестік қарым-қатынастарды құруға ұмтыламыз.</p>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" alt="BI.Group кеңсесі">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- New Comparison Button -->
+    <div class="compare-btn-container">
+        <button class="compare-btn" id="compareBtn">Басқа компаниялармен салыстыру</button>
+    </div>
+
+    <!-- New Comparison Section -->
+    <section class="comparison-section" id="comparisonSection">
+        <div class="container">
+            <div class="section-title">
+                <h2>Біздің негізгі бәсекелестермен салыстыру</h2>
+            </div>
+            <div class="comparison-grid">
+                <!-- BI.Group -->
+                <div class="comparison-company">
+                    <div class="company-logo">
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" alt="BI.Group">
+                    </div>
+                    <div class="company-info">
+                        <h3 class="company-name bi">BI.Group</h3>
+                        <div class="company-pros-cons">
+                            <div class="pros">
+                                <h4>Артықшылықтары</h4>
+                                <ul>
+                                    <li>Халықаралық тәжірибе (30+ ел)</li>
+                                    <li>Толық циклді IT шешімдер</li>
+                                    <li>Инновациялық технологиялар</li>
+                                    <li>Жоғары білікті мамандар</li>
+                                    <li>Клиентке жеке көзқарас</li>
+                                    <li>98% клиенттердің қанағаттануы</li>
+                                </ul>
+                            </div>
+                            <div class="cons">
+                                <h4>Кемшіліктері</h4>
+                                <ul>
+                                    <li>Жоғары сапа үшін жоғары баға</li>
+                                    <li>Күрделі жобаларға ұзақ уақыт</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Devex.com -->
+                <div class="comparison-company">
+                    <div class="company-logo">
+                        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" alt="Devex.com">
+                    </div>
+                    <div class="company-info">
+                        <h3 class="company-name">Devex.com</h3>
+                        <div class="company-pros-cons">
+                            <div class="pros">
+                                <h4>Артықшылықтары</h4>
+                                <ul>
+                                    <li>Грекия нарығындағы тәжірибе</li>
+                                    <li>Орташа баға деңгейі</li>
+                                    <li>Жергілікті нарықты білу</li>
+                                </ul>
+                            </div>
+                            <div class="cons">
+                                <h4>Кемшіліктері</h4>
+                                <ul>
+                                    <li>Шетелдік тәжірибе жоқ</li>
+                                    <li>Технологиялық артта қалу</li>
+                                    <li>Шешімдердің шектеулі ауқымы</li>
+                                    <li>Клиенттердің 73% қанағаттануы</li>
+                                    <li>Жауапкершіліктің төмен деңгейі</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CCC.net -->
+                <div class="comparison-company">
+                    <div class="company-logo">
+                        <img src="https://images.unsplash.com/photo-1521791055366-0d553872125f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" alt="CCC.net">
+                    </div>
+                    <div class="company-info">
+                        <h3 class="company-name">CCC.net</h3>
+                        <div class="company-pros-cons">
+                            <div class="pros">
+                                <h4>Артықшылықтары</h4>
+                                <ul>
+                                    <li>Грекиядағы ірі компания</li>
+                                    <li>Кейбір жергілікті жобалар</li>
+                                    <li>Төмен баға деңгейі</li>
+                                </ul>
+                            </div>
+                            <div class="cons">
+                                <h4>Кемшіліктері</h4>
+                                <ul>
+                                    <li>Халықаралық стандарттарға сәйкес келмейді</li>
+                                    <li>Ескірген технологиялар</li>
+                                    <li>Қызмет көрсету сапасының төмендігі</li>
+                                    <li>Клиенттердің 65% қанағаттануы</li>
+                                    <li>Жобалардың кешігіп берілуі</li>
+                                    <li>Шетелдік тәжірибе жоқ</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="values-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Біздің құндылықтарымыз</h2>
+            </div>
+            <div class="values-grid">
+                <div class="value-item">
+                    <i class="fas fa-lightbulb"></i>
+                    <h4>Инновациялар</h4>
+                    <p>Біз клиенттерге заманауи шешімдер ұсыну үшін үнемі жаңа технологиялар мен тәсілдерді зерттейміз.</p>
+                </div>
+                <div class="value-item">
+                    <i class="fas fa-medal"></i>
+                    <h4>Сапа</h4>
+                    <p>Әрбір өніміміз енгізілгенге дейін қатаң сапа бақылауынан және тестілеуден өтеді.</p>
+                </div>
+                <div class="value-item">
+                    <i class="fas fa-hands-helping"></i>
+                    <h4>Серіктестік</h4>
+                    <p>Біз сенім және өзара табыс негізінде клиенттермен ұзақ мерзімді қарым-қатынастар орнатамыз.</p>
+                </div>
+                <div class="value-item">
+                    <i class="fas fa-users"></i>
+                    <h4>Команда</h4>
+                    <p>Біздің мамандар - бұл біздің басты құндылығымыз. Біз олардың дамуына инвестиция саламыз және өсу үшін жағдай жасаймыз.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="team-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Негізгі қызметкерлер</h2>
+            </div>
+            <div class="team-grid">
+                <div class="team-member">
+                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Алексей Петров">
+                    <h4>Алексей Петров</h4>
+                    <p>Бас директор, Негізін қалаушы</p>
+                    <p>IT және менеджмент саласында 15 жылдан астам тәжірибе. Технологиялар мен бизнесті біріктіретін компания құру ниетімен BI.Group құрды.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Мария Иванова">
+                    <h4>Мария Иванова</h4>
+                    <p>Техникалық директор</p>
+                    <p>Бұлттық технологиялар және бағдарламалық жасақтама архитектурасы саласындағы эксперт. Компанияның техникалық стратегиясын басқарады.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Дмитрий Сидоров">
+                    <h4>Дмитрий Сидоров</h4>
+                    <p>Жетекші әзірлеуші</p>
+                    <p>Машиналық оқу және үлкен деректер саласындағы маман. Негізгі өнімдерді әзірлеу тобын басқарады.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-stack-overflow"></i></a>
+                        <a href="#"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Елена Кузнецова">
+                    <h4>Елена Кузнецова</h4>
+                    <p>Дизайн директоры</p>
+                    <p>Біздің клиенттер үшін интуитивті интерфейстер мен UX стратегияларын жасайды. Дизайн-ойлау саласындағы эксперт.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-behance"></i></a>
+                        <a href="#"><i class="fab fa-dribbble"></i></a>
+                        <a href="#"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
+        </</div>
+    </section>
+
+    <section class="stats-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Біздің жетістіктеріміз</h2>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h3>30+</h3>
+                    <p>Елдерде жобалар</p>
+                </div>
+                <div class="stat-item">
+                    <h3>500+</h3>
+                    <p>Қанағаттанған клиенттер</p>
+                </div>
+                <div class="stat-item">
+                    <h3>98%</h3>
+                    <p>Клиенттердің қанағаттануы</p>
+                </div>
+                <div class="stat-item">
+                    <h3>200+</h3>
+                    <p>Кәсіби қызметкерлер</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <div class="footer-logo">BI.<span>GROUP</span></div>
+                    <p>BI.Group - бұл инновациялық IT шешімдерді әлемдік деңгейде әзірлеуге маманданған халықаралық компания.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h3>Сілтемелер</h3>
+                    <ul>
+                        <li><a href="index.html">Басты бет</a></li>
+                        <li><a href="about.html">Компания туралы</a></li>
+                        <li><a href="services.html">Қызметтер</a></li>
+                        <li><a href="projects.html">Жобалар</a></li>
+                        <li><a href="contact.html">Байланыс</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>Байланыс ақпараты</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Қазақстан, Нұр-Сұлтан, Байқоңыр көш. 12</p>
+                    <p><i class="fas fa-phone"></i> +7 (7172) 123 456</p>
+                    <p><i class="fas fa-envelope"></i> info@bi-group.com</p>
+                    <p><i class="fas fa-clock"></i> Дүйсенбі - Жұма: 9:00 - 18:00</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 BI.Group. Барлық құқықтар қорғалған.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Font Awesome for icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Comparison section toggle
+        const compareBtn = document.getElementById('compareBtn');
+        const comparisonSection = document.getElementById('comparisonSection');
+        
+        compareBtn.addEventListener('click', function() {
+            comparisonSection.classList.toggle('active');
+            
+            // Change button text based on state
+            if (comparisonSection.classList.contains('active')) {
+                compareBtn.textContent = 'Салыстыруды жабу';
+                // Scroll to comparison section
+                setTimeout(() => {
+                    comparisonSection.scrollIntoView({ behavior: 'smooth' });
+                }, 300);
+            } else {
+                compareBtn.textContent = 'Басқа компаниялармен салыстыру';
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BI.Group - Қызметтер</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: #f8f8f8;
+            color: #333;
+            line-height: 1.8;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+        
+        header {
+            background-color: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 1.5rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        header.scrolled {
+            padding: 1rem 0;
+            background-color: rgba(0, 0, 0, 0.95);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        
+        .logo span {
+            color: #c8a97e;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 2.5rem;
+            position: relative;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: color 0.3s;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-links a:hover {
+            color: #c8a97e;
+        }
+        
+        .nav-links li:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: #c8a97e;
+            bottom: 0;
+            left: 0;
+            transition: width 0.3s;
+        }
+        
+        .nav-links li:hover:after {
+            width: 100%;
+        }
+        
+        .services-hero {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+        
+        .services-hero:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+        }
+        
+        .services-hero .container {
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 1s ease;
+        }
+        
+        .services-hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        .services-hero p {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            color: #c8a97e;
+        }
+        
+        .services-section {
+            padding: 8rem 0;
+            background-color: #fff;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+        
+        .section-title h2 {
+            font-size: 3rem;
+            color: #222;
+            font-weight: 700;
+            letter-spacing: 1px;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 1rem;
+        }
+        
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 3px;
+            background: #c8a97e;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+        }
+        
+        .service-card {
+            background-color: #fff;
+            padding: 3rem 2.5rem;
+            border-radius: 5px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.4s ease;
+            border-bottom: 3px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            border-bottom-color: #c8a97e;
+        }
+        
+        .service-card h3 {
+            margin-bottom: 1.5rem;
+            color: #222;
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+        
+        .service-card i {
+            font-size: 3.5rem;
+            color: #c8a97e;
+            margin-bottom: 2rem;
+            display: block;
+        }
+        
+        .service-card p {
+            margin-bottom: 1.5rem;
+            color: #666;
+        }
+        
+        .service-card ul {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+        
+        .service-card ul li {
+            padding: 0.5rem 0;
+            position: relative;
+            padding-left: 1.5rem;
+            color: #555;
+        }
+        
+        .service-card ul li:before {
+            content: '\f00c';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: #c8a97e;
+        }
+        
+        .process-section {
+            padding: 8rem 0;
+            background-color: #f9f9f9;
+        }
+        
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 3rem;
+            text-align: center;
+        }
+        
+        .process-step {
+            position: relative;
+            padding: 2rem;
+            background: #fff;
+            border-radius: 5px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .process-step:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .process-step:not(:last-child):after {
+            content: '\f061';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            position: absolute;
+            top: 50%;
+            right: -25px;
+            transform: translateY(-50%);
+            color: #c8a97e;
+            font-size: 1.5rem;
+        }
+        
+        .process-step i {
+            font-size: 3rem;
+            color: #c8a97e;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+        
+        .process-step h4 {
+            margin-bottom: 1rem;
+            color: #222;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .process-step p {
+            color: #666;
+        }
+        
+        .technology-section {
+            padding: 8rem 0;
+            background-color: #fff;
+        }
+        
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 3rem;
+            text-align: center;
+        }
+        
+        .tech-item {
+            padding: 2rem;
+            background: #f9f9f9;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .tech-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+        }
+        
+        .tech-item img {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+            margin-bottom: 1.5rem;
+            filter: grayscale(100%);
+            transition: all 0.3s ease;
+        }
+        
+        .tech-item:hover img {
+            filter: grayscale(0%);
+        }
+        
+        .tech-item p {
+            font-weight: 600;
+            color: #333;
+        }
+        
+        footer {
+            background-color: #222;
+            color: #fff;
+            padding: 5rem 0 2rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+        
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-logo span {
+            color: #c8a97e;
+        }
+        
+        .footer-about p {
+            color: #aaa;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-links h3, .footer-contact h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .footer-links h3:after, .footer-contact h3:after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 2px;
+            background: #c8a97e;
+            bottom: 0;
+            left: 0;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-links a {
+            color: #aaa;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: #c8a97e;
+        }
+        
+        .footer-contact p {
+            color: #aaa;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .footer-contact i {
+            margin-right: 1rem;
+            color: #c8a97e;
+        }
+        
+        .social-links {
+            margin-bottom: 2rem;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border-radius: 50%;
+            margin-right: 1rem;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background: #c8a97e;
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .services-hero h1 {
+                font-size: 3.5rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2.5rem;
+            }
+            
+            .process-step:not(:last-child):after {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .services-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .services-hero p {
+                font-size: 1.2rem;
+            }
+            
+            .services-section, .process-section, .technology-section {
+                padding: 5rem 0;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header id="header">
+        <div class="container">
+            <nav>
+                <div class="logo">BI.<span>GROUP</span></div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Басты бет</a></li>
+                    <li><a href="about.html">Компания туралы</a></li>
+                    <li><a href="services.html">Қызметтер</a></li>
+                    <li><a href="projects.html">Жобалар</a></li>
+                    <li><a href="contact.html">Байланыс</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="services-hero">
+        <div class="container">
+            <h1>Біздің қызметтер</h1>
+            <p>Бизнесіңізді цифрландыруға арналған инновациялық IT шешімдері</p>
+        </div>
+    </section>
+
+    <section class="services-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Біздің мамандандырылған шешімдеріміз</h2>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <i class="fas fa-laptop-code"></i>
+                    <h3>Бағдарламалық жасақтаманы әзірлеу</h3>
+                    <p>Күрделі бизнес мәселелерін шешетін және бәсекеге қабілеттілік бередік қуатты бағдарламалық шешімдерді жасаймыз.</p>
+                    <ul>
+                        <li>Корпоративтік басқару жүйелері</li>
+                        <li>Интеграцияланған CRM және ERP шешімдері</li>
+                        <li>Бизнес процестерін автоматтандыру</li>
+                        <li>Микросервистік архитектура</li>
+                        <li>API интеграциялары</li>
+                    </ul>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-globe"></i>
+                    <h3>Веб-әзірлеу</h3>
+                    <p>Пайдаланушы тәжірибесіне және өнімділікке бағытталған жоғары жүктемелі веб-қосымшаларды жобалаймыз және әзірлейміз.</p>
+                    <ul>
+                        <li>Интернет-дүкендер және маркетплейстер</li>
+                        <li>Корпоративтік порталдар және интранет</li>
+                        <li>Прогрессивті веб-қосымшалар (PWA)</li>
+                        <li>Күрделі SaaS шешімдері</li>
+                        <li>Headless CMS архитектурасы</li>
+                    </ul>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-mobile-alt"></i>
+                    <h3>Мобильді қосымшалар</h3>
+                    <p>Пайдаланушылардың қатысуын арттыратын және бизістің табысын көбейтетін мобильді қосымшаларды әзірлейміз.</p>
+                    <ul>
+                        <li>Кроссплатформалық қосымшалар (Flutter, React Native)</li>
+                        <li>iOS және Android үшін тума қосымшалар</li>
+                        <li>Электронды коммерцияға арналған қосымшалар</li>
+                        <li>Enterprise мобильді шешімдер</li>
+                        <li>IoT құрылғыларымен интеграция</li>
+                    </ul>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-cloud"></i>
+                    <h3>Бұлттық шешімдер</h3>
+                    <p>Кез келген масштабтағы бизнес үшін қауіпсіз және масштабталатын бұлттық инфрақұрылымды қамтамасыз етеміз.</p>
+                    <ul>
+                        <li>Бұлтқа миграция (AWS, Azure, Google Cloud)</li>
+                        <li>Гибридті және мультибұлтты стратегиялар</li>
+                        <li>Бұлттық қауіпсіздік және сәйкестік</li>
+                        <li>Serverless архитектура</li>
+                        <li>Басқарылатын Kubernetes сервистері</li>
+                    </ul>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Деректерді талдау</h3>
+                    <p>Жедел технологиялар мен визуализация арқылы деректерді құнды түсініктерге айналдырамыз.</p>
+                    <ul>
+                        <li>Data Science және машиналық оқыту</li>
+                        <li>BI-шешімдері және дашбордтар</li>
+                        <li>Болжамды және прескриптивті талдау</li>
+                        <li>Үлкен деректерді өңдеу (Big Data)</li>
+                        <li>Data Lake және Data Warehouse шешімдері</li>
+                    </ul>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Киберқауіпсіздік</h3>
+                    <p>Қазіргі заманғы киберқауіптерден цифрлық активтерді кешенді қорғау және стандарттарға сәйкестік.</p>
+                    <ul>
+                        <li>Пентестік және қауіпсіздік аудиті</li>
+                        <li>DDoS қорғанысы және WAF шешімдері</li>
+                        <li>Деректерді шифрлау және PKI инфрақұрылымы</li>
+                        <li>SIEM мониторинг жүйелері</li>
+                        <li>GDPR және PCI DSS сәйкестігі</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="process-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Біздің жұмыс әдісіміз</h2>
+            </div>
+            <div class="process-steps">
+                <div class="process-step">
+                    <i class="fas fa-lightbulb"></i>
+                    <h4>Зерттеу</h4>
+                    <p>Бизнес процестерін терең талдау және Design Thinking әдісін қолдана отырып талаптарды егжей-тегжейлі құрастыру</p>
+                </div>
+                <div class="process-step">
+                    <i class="fas fa-pencil-ruler"></i>
+                    <h4>Жобалау</h4>
+                    <p>Интерактивті прототиптер, архитектуралық шешімдер және дизайн-жүйелерді жасау</p>
+                </div>
+                <div class="process-step">
+                    <i class="fas fa-code"></i>
+                    <h4>Әзірлеу</h4>
+                    <p>Scrum әдісі бойынша жобаны итерациялық түрде іске асыру және тұрақты демонстрациялар</p>
+                </div>
+                <div class="process-step">
+                    <i class="fas fa-test"></i>
+                    <h4>Тестілеу</h4>
+                    <p>Автоматтандырылған және қолмен тестілеу барлық пайдалану сценарийлерін қамтиды</p>
+                </div>
+                <div class="process-step">
+                    <i class="fas fa-rocket"></i>
+                    <h4>Енгізу</h4>
+                    <p>Кезеңдік іске қосу, пайдаланушыларды оқыту және 24/7 техникалық қолдау</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="technology-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Технологиялық стек</h2>
+            </div>
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <img src="https://cdn.worldvectorlogo.com/logos/javascript-1.svg" alt="JavaScript">
+                    <p>JavaScript</p>
+                </div>
+                <div class="tech-item">
+                    <img src="https://cdn.worldvectorlogo.com/logos/python-5.svg" alt="Python">
+                    <p>Python</p>
+                </div>
+                <div class="tech-item">
+                    <img src="https://cdn.worldvectorlogo.com/logos/java-4.svg" alt="Java">
+                    <p>Java</p>
+                </div>
+                <div class="tech-item">
+                    <img src="https://cdn.worldvectorlogo.com/logos/react-2.svg" alt="React">
+                    <p>React</p>
+                </div>
+                <div class="tech-item">
+                    <img src="https://cdn.worldvectorlogo.com/logos/nodejs-1.svg" alt="Node.js">
+                    <p>Node.js</p>
+                </div>
+                <div class="tech-item">
+                    <img src="https://cdn.worldvectorlogo.com/logos/aws-2.svg" alt="AWS">
+                    <p>AWS</p>
+                </div>
+                <div class="tech-item">
+                    <img src="https://cdn.worldvectorlogo.com/logos/docker.svg" alt="Docker">
+                    <p>Docker</p>
+                </div>
+                <div class="tech-item">
+                    <img src="https://cdn.worldvectorlogo.com/logos/kubernets.svg" alt="Kubernetes">
+                    <p>Kubernetes</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <div class="footer-logo">BI.<span>GROUP</span></div>
+                    <p>Бизнесті цифрландыруға арналған инновациялық IT шешімдері. Сіздің табысыңыз үшін жұмыс істейтін технологияларды жасаймыз.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h3>Навигация</h3>
+                    <ul>
+                        <li><a href="index.html">Басты бет</a></li>
+                        <li><a href="about.html">Компания туралы</a></li>
+                        <li><a href="services.html">Қызметтер</a></li>
+                        <li><a href="projects.html">Жобалар</a></li>
+                        <li><a href="contact.html">Байланыс</a></li>
+                        <li><a href="blog.html">Блог</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>Байланыс</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Нұр-Сұлтан, Кенесары көшесі, 40</p>
+                    <p><i class="fas fa-phone"></i> +7 (7172) 123-45-67</p>
+                    <p><i class="fas fa-envelope"></i> info@bi.group</p>
+                    <p><i class="fas fa-clock"></i> Дс-Сб: 9:00 - 18:00</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 BI.Group. Барлық құқықтар қорғалған.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Animation on scroll
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.service-card, .process-step, .tech-item');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
+                
+                if (elementPosition < screenPosition) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        }
+        
+        // Set initial state for animation
+        document.querySelectorAll('.service-card, .process-step, .tech-item').forEach(element => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(30px)';
+            element.style.transition = 'all 0.6s ease';
+        });
+        
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
+    </script>
+</body>
+</html>
