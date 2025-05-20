@@ -744,20 +744,6 @@
   </div>
 </div>
 
-<script>
-  const modal = document.getElementById("regModal");
-
-  if (!localStorage.getItem("visited")) {
-    modal.classList.add("show");
-    localStorage.setItem("visited", "true");
-  }
-
-  function closeModal() {
-    modal.classList.remove("show");
-  }
-</script>
-
-<div class="modal" id="regModal">
   <div class="modal-content">
     <h2>Регистрация</h2>
     <form onsubmit="closeModal(); return false;">
@@ -813,9 +799,24 @@
   }
 
   function closeModal() {
-    modal.classList.remove("show");
+    // Создаем сообщение
+    const successMsg = document.createElement("div");
+    successMsg.classList.add("success-message");
+    successMsg.textContent = "✅ Успешно зарегистрирован!";
+    modal.querySelector(".modal-content").appendChild(successMsg);
+
+    // Показать с анимацией
+    setTimeout(() => {
+      successMsg.classList.add("show");
+    }, 100);
+
+    // Закрыть окно через 2 секунды
+    setTimeout(() => {
+      modal.classList.remove("show");
+    }, 2000);
   }
 </script>
+
 
 </body>
 </html>
